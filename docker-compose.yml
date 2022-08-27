@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    container_name: pg-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=film_db
+      - POSTGRES_USER=root
+      - POSTGRES_PORT=3306
+      - POSTGRES_HOST=localhost
+    ports:
+      - 3002:3306
+
+  cache:
+    image: redis
+    container_name: cache-redis
+    ports:
+      - 6379:6379
+    volumes:
+      - cache:/data
+    depends_on:
+      - db
+
+  backend:
+    image: backend
+    container_name: app_nestjs
+    build: ./
+    ports:
+      - 3001:3001
+    depends_on:
+      - cache
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=film_db
+      - POSTGRES_USER=root
+      - POSTGRES_PORT=3306
+      - POSTGRES_HOST=localhost
+    
+volumes:
+  cache:
+    driver: local
