@@ -13,6 +13,6 @@ export class User {
   @Column()
   password: string
 
-  @Column()
+  @Column('int')
   age: number
 }

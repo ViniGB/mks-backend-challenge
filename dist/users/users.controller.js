@@ -20,7 +20,7 @@ let UsersController = class UsersController {
         this.usersService = usersService;
     }
     findAll() {
-        return this.usersService.findAll();
+        return 'All good';
     }
     findOne(id) {
         return this.usersService.findById(id);
@@ -30,7 +30,7 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
